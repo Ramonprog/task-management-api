@@ -8,7 +8,8 @@ module.exports = {
   plugins: ['@typescript-eslint', 'prettier'],
   extends: [
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
+    'prettier', // Adicionando o plugin do Prettier
+    'prettier/@typescript-eslint', // Para desativar regras do @typescript-eslint que conflitam com o Prettier
   ],
   root: true,
   env: {
@@ -27,8 +28,9 @@ module.exports = {
       {
         singleQuote: true,
         trailingComma: 'all',
-        semi: true,
+        semi: false,
+        endOfLine: 'auto', // Para que o Prettier escolha automaticamente o estilo de quebra de linha correto
       },
     ],
   },
-};
+}
