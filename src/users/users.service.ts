@@ -7,14 +7,18 @@ import { hashSync } from 'bcrypt'
 export class UsersService {
   private readonly users: UserDto[] = []
 
-  create(user: UserDto) {
+  create(user: UserDto): UserDto {
     const password = hashSync(user.password, 10)
     const newUser = { id: uuidv4(), ...user, password }
     this.users.push(newUser)
     return newUser
   }
 
-  findAll() {
+  findAll(): UserDto[] {
     return this.users
+  }
+
+  findOne(username: string): UserDto | null {
+    return this.users.find((user) => user.username === username) || null
   }
 }
