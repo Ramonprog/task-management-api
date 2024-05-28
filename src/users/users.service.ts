@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { UserDto } from './user.dto'
+import { v4 as uuidv4 } from 'uuid'
+import { hashSync } from 'bcrypt'
 
 @Injectable()
 export class UsersService {
@@ -9,6 +11,9 @@ export class UsersService {
   ]
 
   create(user: UserDto) {
-    return `This action adds a new user with username: ${user.username}`
+    const password = hashSync(user.password, 10)
+    const newUser = { id: uuidv4(), ...user, password }
+    this.users.push(newUser)
+    return newUser
   }
 }
