@@ -16,4 +16,8 @@ export class UsersService {
     this.users.push(newUser)
     return newUser
   }
+
+  findAll() {
+    return this.users
+  }
 }
